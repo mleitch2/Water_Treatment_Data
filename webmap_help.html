@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Water Treatment Web Map Help</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>
+  body { font-family: Arial, sans-serif; margin: 24px; line-height:1.45; color:#222; }
+  h1 { color:#0a5; margin-top:0; }
+  h2 { color:#0a5; margin-top:2em; border-bottom:2px solid #e2f2ee; padding-bottom:4px; }
+  code, pre { background:#f5f7f8; padding:2px 4px; border-radius:4px; font-size:90%; }
+  .kbd { display:inline-block; padding:2px 6px; border:1px solid #bbb; border-radius:4px; background:#fafafa; font-size:12px; font-family:inherit; }
+  ul { margin-top:4px; }
+  .section { max-width:900px; }
+  .note { background:#fffbe6; border:1px solid #f1e4a3; padding:8px 12px; border-radius:6px; margin:12px 0; }
+  .tip { background:#e8f7f1; border:1px solid #b9e4d4; padding:8px 12px; border-radius:6px; margin:12px 0; }
+  table { border-collapse:collapse; margin:12px 0; }
+  th, td { border:1px solid #ddd; padding:6px 10px; text-align:left; }
+  th { background:#f0f5f4; }
+  a { color:#0a5; text-decoration:none; }
+  a:hover { text-decoration:underline; }
+</style>
+</head>
+<body>
+<h1>Water Treatment Professionals Web Map – Help & Usage Guide</h1>
+<p>This guide explains how to search, filter, zoom, select, and export data in the Water Treatment Professionals web map. Keep this tab open as a quick reference.</p>
+
+<div class="section">
+<h2>1. Interface Overview</h2>
+<ul>
+  <li><strong>Main Search Box:</strong> Finds professionals or facilities by name, company, city, state, role, or other key fields. Suggestions appear as you type.</li>
+  <li><strong>Zoom to State or City Bar:</strong> Type a state (e.g., <code>TX</code>, <code>Texas</code>) or a city (<code>Austin</code> or <code>Austin, TX</code>) then press <span class="kbd">Enter</span> or click <strong>Go</strong>.</li>
+  <li><strong>Help:</strong> Opens this guide in a new tab.</li>
+  <li><strong>Filters Panel:</strong> (Service Y/N, capabilities, roles, companies, experience, etc.) dynamically refines the visible dataset.</li>
+  <li><strong>Map:</strong> Shows water treatment professionals (points) and facilities (blue triangles). Selection tools let you draw an area to select features.</li>
+</ul>
+
+<h2>2. Searching & Suggestions</h2>
+<h3>Main Search</h3>
+<ul>
+  <li>Type any part of a name, company, role, or location; multi-word search matches all words.</li>
+  <li>Suggestion categories: <em>Water Treatment Professionals</em> and <em>Water Facilities</em>.</li>
+  <li>Click a suggestion to zoom and temporarily highlight the feature.</li>
+</ul>
+<h3>State & City Zoom Bar</h3>
+<ul>
+  <li>Type a state name or its postal abbreviation. Suggestions list states first.</li>
+  <li>Type a city; after indexing completes, matching cities appear beneath states.</li>
+  <li>For duplicate city names, each state variant appears separately (e.g., <code>Springfield</code> shows multiple entries).</li>
+  <li>City zoom uses a dynamic density-based zoom level and flashes an orange highlight.</li>
+</ul>
+
+<h2>3. State / City Zoom Behavior</h2>
+<ul>
+  <li><strong>States:</strong> Two-stage approach – fits state extent then refines to a closer, appropriate zoom.</li>
+  <li><strong>Cities:</strong> Center+zoom based on nearby feature density; sparse areas zoom in closer.</li>
+  <li>Fallback logic triggers if the initial map move fails (rare network/render timing issues).</li>
+</ul>
+
+<h2>4. Filtering Data</h2>
+<p>Filters modify each layer's definition expression so only matching records display and participate in selection & export.</p>
+<ul>
+  <li><strong>Service (Y/N):</strong> Normalized internally to a unified field.</li>
+  <li><strong>Capabilities:</strong> Additional internal alias fields (e.g., HVAC, COOLING) are used for consistent querying.</li>
+  <li><strong>Professionals:</strong> Role, company, and experience range can be combined. Empty criteria don’t exclude data.</li>
+</ul>
+<div class="tip"><strong>Tip:</strong> After adjusting filters, counters and selection operate only on the filtered subset.</div>
+
+<h2>5. Selecting Features</h2>
+<ul>
+  <li>Activate a selection mode (box, lasso, etc.) if provided in the UI (or custom button).</li>
+  <li>Only features currently visible (respecting filters) are considered.</li>
+  <li>Selection does not force hidden layers to become visible.</li>
+</ul>
+
+<h2>6. Exporting Data</h2>
+<ul>
+  <li>Exports honor filters and current selection.</li>
+  <li>If nothing is selected, you can optionally export all currently filtered features (depending on configuration).</li>
+  <li>CSV columns align with displayed/parsed headers (internal helper fields like <code>_YearsExpNum</code> may be excluded).</li>
+</ul>
+
+<h2>7. Highlight & Feedback</h2>
+<ul>
+  <li>Search suggestion clicks highlight the chosen feature briefly.</li>
+  <li>City zoom adds a temporary orange marker at the city center.</li>
+  <li>Console logs (Developer Tools) provide diagnostic messages for advanced troubleshooting.</li>
+</ul>
+
+<h2>8. Performance Notes</h2>
+<ul>
+  <li>City index builds once (lazy load) – first city query may be slightly slower, then instantaneous.</li>
+  <li>Large datasets are processed with guards to avoid blocking UI where possible.</li>
+  <li>State extents prefer dynamic polygons if available; static fallback extents ensure reliability.</li>
+</ul>
+
+<h2>9. Troubleshooting</h2>
+<table>
+  <tr><th>Issue</th><th>Likely Cause</th><th>Action</th></tr>
+  <tr><td>No city suggestions</td><td>Index not built yet</td><td>Wait 1–2 seconds or retype; check console for fetch errors.</td></tr>
+  <tr><td>State not zooming</td><td>Typo or unsupported token</td><td>Use full name or two-letter code (e.g., <code>TX</code>).</td></tr>
+  <tr><td>Export empty</td><td>All records filtered out or none selected</td><td>Relax filters or select features first.</td></tr>
+  <tr><td>Highlight missing</td><td>Layer view still loading</td><td>Wait for map to finish drawing, try again.</td></tr>
+</table>
+
+<h2>10. Tips for Power Users</h2>
+<ul>
+  <li>Combine multi-word searches (e.g., <code>cooling engineer houston</code>) for precise matches.</li>
+  <li>Use <code>City, ST</code> format to disambiguate duplicate city names.</li>
+  <li>Open DevTools (F12) to view detailed console logs for zoom and indexing steps.</li>
+</ul>
+
+<p style="margin-top:3em; font-size:12px; color:#666;">Generated help page – last updated: <span id="lastUpdated"></span></p>
+<script>document.getElementById('lastUpdated').textContent = new Date().toISOString().split('T')[0];</script>
+</div>
+</body>
+</html>
