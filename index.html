@@ -98,7 +98,7 @@
           </label>
           <label style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
             <input type="checkbox" id="chkBlueTriangles">
-            Water Facilities
+            Water Treatment Companies
           </label>
           
           <label style="display: flex; align-items: center; gap: 8px;">
@@ -2354,7 +2354,7 @@
           });
         }
         if (blueMatches.length) {
-          html += `<div style='padding:4px 8px; font-weight:bold; color:#003366; background:#e6eaff;'>Water Facilities</div>`;
+          html += `<div style='padding:4px 8px; font-weight:bold; color:#003366; background:#e6eaff;'>Water Treatment Companies</div>`;
           blueMatches.forEach(f => {
             html += `<div class='search-suggestion' data-layer='blue' data-oid='${f.attributes.ObjectID}' style='padding:4px 8px; cursor:pointer;'>${featureLabel(f)}</div>`;
           });
@@ -2947,7 +2947,7 @@
         tabOrder.push('professionals');
       }
       if (filteredBlue.length) {
-        html += `<button class='tab${tabOrder.length ? '' : ' active'}'>Water Facilities (${filteredBlue.length})</button>`;
+        html += `<button class='tab${tabOrder.length ? '' : ' active'}'>Water Treatment Companies (${filteredBlue.length})</button>`;
         tabOrder.push('blue');
       }
       
@@ -3035,7 +3035,7 @@
       const total = proCount + blueCount; 
       let html = '';
       html += `<span style='color:#f5f2e6;'>Professionals:</span> <b style='color:#fff;'>${proCount}</b> &nbsp;`;
-      html += `<span style='color:#0074D9;'>Water Facilities:</span> <b style='color:#fff;'>${blueCount}</b> &nbsp;`;
+      html += `<span style='color:#0074D9;'>Water Treatment Companies:</span> <b style='color:#fff;'>${blueCount}</b> &nbsp;`;
       html += `<span style='color:#888;'>Total:</span> <b style='color:#fff;'>${total}</b>`;
       counterDiv.innerHTML = html;
     }
@@ -3955,7 +3955,7 @@ function activateSelectMode(mode) {
         html += '</div>';
       }
       if (blueTrianglesLayerRef && blueTrianglesLayerRef.visible) {
-        html += '<div style="margin-bottom:8px;"><span style="font-weight:bold; color:#003366;">Water Facilities</span><br>';
+        html += '<div style="margin-bottom:8px;"><span style="font-weight:bold; color:#003366;">Water Treatment Companies</span><br>';
         html += `<span style='display:inline-block; width:0; height:0; border-left:9px solid transparent; border-right:9px solid transparent; border-bottom:18px solid #0074D9; margin-right:6px; vertical-align:middle;'></span> <span style='vertical-align:middle;'></span><br>`;
         html += '</div>';
       }
@@ -4041,4 +4041,5 @@ function activateSelectMode(mode) {
 </body>
 
 </html>
+
 
